@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3C20Qpc+PkQ6qCFD0f65f0ePpTkfUd4C/kzIdnEDuQxmCqmWtl9YD3gsNM3z5nLRptev7e/ypZPTdrbF+Ipzww==",
+  "dgSpecHash": "QoZrPb+L3STNR+Rb7271t/JZlUvrMVGMuKMC6mlDjf35fLeo/qOBlq7/Ooly8yeOprrfzRdLh/KETBDqcFnKdg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Administrador\\Desktop\\Curso API com DDD\\src\\Api.Data\\Data.csproj",
+  "projectFilePath": "C:\\Users\\Administrador\\Desktop\\Projetos no GitHub\\Curso API com DDD\\src\\Api.Data\\Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Administrador\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\Administrador\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",

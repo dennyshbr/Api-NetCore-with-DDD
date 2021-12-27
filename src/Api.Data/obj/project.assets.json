@@ -5022,11 +5022,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Administrador\\Desktop\\Curso API com DDD\\src\\Api.Data\\Data.csproj",
+      "projectUniqueName": "C:\\Users\\Administrador\\Desktop\\Projetos no GitHub\\Curso API com DDD\\src\\Api.Data\\Data.csproj",
       "projectName": "Data",
-      "projectPath": "C:\\Users\\Administrador\\Desktop\\Curso API com DDD\\src\\Api.Data\\Data.csproj",
+      "projectPath": "C:\\Users\\Administrador\\Desktop\\Projetos no GitHub\\Curso API com DDD\\src\\Api.Data\\Data.csproj",
       "packagesPath": "C:\\Users\\Administrador\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Administrador\\Desktop\\Curso API com DDD\\src\\Api.Data\\obj\\",
+      "outputPath": "C:\\Users\\Administrador\\Desktop\\Projetos no GitHub\\Curso API com DDD\\src\\Api.Data\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Administrador\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5042,8 +5042,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\Administrador\\Desktop\\Curso API com DDD\\src\\Api.Domain\\Domain.csproj": {
-              "projectPath": "C:\\Users\\Administrador\\Desktop\\Curso API com DDD\\src\\Api.Domain\\Domain.csproj"
+            "C:\\Users\\Administrador\\Desktop\\Projetos no GitHub\\Curso API com DDD\\src\\Api.Domain\\Domain.csproj": {
+              "projectPath": "C:\\Users\\Administrador\\Desktop\\Projetos no GitHub\\Curso API com DDD\\src\\Api.Domain\\Domain.csproj"
             }
           }
         }
@@ -5089,7 +5089,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.415\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
       }
     }
   }
