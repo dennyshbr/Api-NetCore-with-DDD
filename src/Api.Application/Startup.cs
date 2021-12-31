@@ -1,10 +1,12 @@
 using System;
 using Api.CrossCutting.DependencyInjection;
+using Domain.Security;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 
 namespace Application
@@ -23,6 +25,17 @@ namespace Application
         {
             ConfigureService.ConfigureDependenciesService(services);
             ConfigureRepository.ConfigureDependenciesRepository(services);
+
+            var signingConfiguration = new SigningConfiguration();
+            services.AddSingleton(signingConfiguration);
+
+            var tokenConfiguration = new TokenConfiguration();
+
+            new ConfigureFromConfigurationOptions<TokenConfiguration>(
+                Configuration.GetSection("TokenConfigurations")
+            ).Configure(tokenConfiguration);
+
+            services.AddSingleton(tokenConfiguration);
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
