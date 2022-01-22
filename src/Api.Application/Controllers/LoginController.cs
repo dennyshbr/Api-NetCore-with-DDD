@@ -1,5 +1,6 @@
 using Api.Domain.Interfaces.Services.User;
 using Domain.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Net;
@@ -11,6 +12,7 @@ namespace Api.Application.Controllers
     [ApiController]
     public class LoginController : ControllerBase
     {
+        //[AllowAnonymous]
         [HttpPost]
         public async Task<object> Login([FromBody] LoginDTO loginDto, [FromServices] ILoginService loginService)
         {
