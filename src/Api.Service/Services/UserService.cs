@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using Api.Domain.Entities;
 using Api.Domain.Interfaces;
 using Api.Domain.Interfaces.Services.User;
+using AutoMapper;
+using Domain.DTOs.User;
 
 namespace Api.Service.Services
 {
@@ -11,9 +13,12 @@ namespace Api.Service.Services
     {
         private readonly IRepository<UserEntity> _repository;
 
-        public UserService(IRepository<UserEntity> repository)
+        private readonly IMapper _mapper;
+
+        public UserService(IRepository<UserEntity> repository, IMapper mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
 
         public async Task<bool> Delete(Guid id)
@@ -21,24 +26,36 @@ namespace Api.Service.Services
             return await _repository.DeleteAsync(id);
         }
 
-        public async Task<UserEntity> Get(Guid id)
+        public async Task<UserDto> Get(Guid id)
         {
-            return await _repository.GetAsync(id);
+            UserEntity userEntity = await _repository.GetAsync(id);
+
+            return _mapper.Map<UserDto>(userEntity) ?? new UserDto();
         }
 
-        public async Task<IEnumerable<UserEntity>> GetAll()
+        public async Task<IEnumerable<UserDto>> GetAll()
         {
-            return await _repository.GetAllAsync();
+            var list = await _repository.GetAllAsync();
+
+            return _mapper.Map<IEnumerable<UserDto>>(list);
         }
 
-        public async Task<UserEntity> Post(UserEntity user)
+        public async Task<UserCreateResultDTO> Post(UserDtoCreate user)
         {
-            return await _repository.InsertAsync(user);
+            var userEntity = _mapper.Map<UserEntity>(user);
+
+            userEntity = await _repository.InsertAsync(userEntity);
+
+            return _mapper.Map<UserCreateResultDTO>(userEntity);
         }
 
-        public async Task<UserEntity> Put(UserEntity user)
+        public async Task<UserUpdateResultDTO> Put(UserDtoUpdate user)
         {
-            return await _repository.UpdateAsync(user);
+            var userEntity = _mapper.Map<UserEntity>(user);
+
+            userEntity = await _repository.UpdateAsync(userEntity);
+
+            return _mapper.Map<UserUpdateResultDTO>(userEntity);
         }
     }
 }

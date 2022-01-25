@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Api.CrossCutting.DependencyInjection;
+using AutoMapper;
+using CrossCutting.Mappings;
 using Domain.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -28,6 +30,14 @@ namespace Application
         {
             ConfigureService.ConfigureDependenciesService(services);
             ConfigureRepository.ConfigureDependenciesRepository(services);
+
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new DtoToEntityProfile());
+            });
+
+            IMapper mapper = config.CreateMapper();
+            services.AddSingleton(mapper);
 
             var signingConfiguration = new SigningConfiguration();
             services.AddSingleton(signingConfiguration);
@@ -81,7 +91,7 @@ namespace Application
                 });
 
                 c.AddSecurityRequirement(new OpenApiSecurityRequirement
-                {   
+                {
                     {
                         new OpenApiSecurityScheme
                         {
@@ -94,6 +104,8 @@ namespace Application
                     }
                 });
             });
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
