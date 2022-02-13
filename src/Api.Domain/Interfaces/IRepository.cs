@@ -10,7 +10,7 @@ namespace Api.Domain.Interfaces
         Task<bool> DeleteAsync(Guid id);
         Task<bool> ExistAsync(Guid id);
         Task<T> GetAsync(Guid id);
-        Task<IEnumerable<T>> GetAllAsync();
+        Task<IList<T>> GetAllAsync();
 
         Task<T> InsertAsync(T entity);
 

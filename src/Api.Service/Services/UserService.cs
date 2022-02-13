@@ -33,11 +33,11 @@ namespace Api.Service.Services
             return _mapper.Map<UserDto>(userEntity) ?? new UserDto();
         }
 
-        public async Task<IEnumerable<UserDto>> GetAll()
+        public async Task<IList<UserDto>> GetAll()
         {
             var list = await _repository.GetAllAsync();
 
-            return _mapper.Map<IEnumerable<UserDto>>(list);
+            return _mapper.Map<List<UserDto>>(list);
         }
 
         public async Task<UserCreateResultDTO> Post(UserDtoCreate user)

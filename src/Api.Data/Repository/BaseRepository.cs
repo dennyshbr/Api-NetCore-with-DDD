@@ -45,7 +45,7 @@ namespace Api.Data.Repository
             }
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public async Task<IList<T>> GetAllAsync()
         {
             try
             {
