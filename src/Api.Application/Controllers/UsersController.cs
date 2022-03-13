@@ -27,11 +27,11 @@ namespace Api.Application.Controllers
             {
                 return Ok(await _userService.GetAll());
             }
-            catch (ArgumentException argumentEx)
+            catch (Exception ex)
             {
                 int statusCode = (int)HttpStatusCode.InternalServerError;
 
-                return StatusCode(statusCode, argumentEx.Message);
+                return StatusCode(statusCode, ex.Message);
             }
         }
 
@@ -47,11 +47,11 @@ namespace Api.Application.Controllers
             {
                 return Ok(await _userService.Get(id));
             }
-            catch (ArgumentException argumentEx)
+            catch (Exception ex)
             {
                 int statusCode = (int)HttpStatusCode.InternalServerError;
 
-                return StatusCode(statusCode, argumentEx.Message);
+                return StatusCode(statusCode, ex.Message);
             }
         }
 
@@ -75,11 +75,11 @@ namespace Api.Application.Controllers
                 else
                     return BadRequest("Occurred error to create user.");
             }
-            catch (ArgumentException argumentEx)
+            catch (Exception ex)
             {
                 int statusCode = (int)HttpStatusCode.InternalServerError;
 
-                return StatusCode(statusCode, argumentEx.Message);
+                return StatusCode(statusCode, ex.Message);
             }
         }
 
@@ -101,11 +101,11 @@ namespace Api.Application.Controllers
                 else
                     return BadRequest("Occurred error to update user.");
             }
-            catch (ArgumentException argumentEx)
+            catch (Exception ex)
             {
                 int statusCode = (int)HttpStatusCode.InternalServerError;
 
-                return StatusCode(statusCode, argumentEx.Message);
+                return StatusCode(statusCode, ex.Message);
             }
         }
 
@@ -128,11 +128,11 @@ namespace Api.Application.Controllers
                 else
                     return BadRequest("Occurred error to delete user.");
             }
-            catch (ArgumentException argumentEx)
+            catch (Exception ex)
             {
                 int statusCode = (int)HttpStatusCode.InternalServerError;
 
-                return StatusCode(statusCode, argumentEx.Message);
+                return StatusCode(statusCode, ex.Message);
             }
         }
     }

@@ -23,7 +23,11 @@
       "launchUrl": "weatherforecast",
       "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "Audience": "ExampleAudience",
+        "Issuer": "ExampleIssuer",
+        "Seconds": "300",
+        "ConnectionSql": "Data Source=(localdb)\\MSSQLLocalDB;Database=dbApicomDDD;Integrated Security=true"
       }
     }
   }

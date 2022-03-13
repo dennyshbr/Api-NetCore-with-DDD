@@ -12,9 +12,9 @@ namespace Api.CrossCutting.DependencyInjection
 {
     public class ConfigureRepository
     {
-        public static void ConfigureDependenciesRepository(IServiceCollection service, IConfiguration configuration)
+        public static void ConfigureDependenciesRepository(IServiceCollection service)
         {
-            string connectionString = configuration.GetConnectionString("ConnectionSql");
+            string connectionString = Environment.GetEnvironmentVariable("ConnectionSql");
 
             service.AddDbContext<MyContext>(
                 options => options.UseSqlServer(connectionString)

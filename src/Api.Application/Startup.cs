@@ -18,18 +18,29 @@ namespace Application
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
             Configuration = configuration;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public IConfiguration Configuration { get; }
 
+        public IWebHostEnvironment _webHostEnvironment { get; }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            if (_webHostEnvironment.IsEnvironment("Testing"))
+            {
+                Environment.SetEnvironmentVariable("Audience", "ExampleAudience");
+                Environment.SetEnvironmentVariable("Issuer", "ExampleIssuer");
+                Environment.SetEnvironmentVariable("Seconds", "300");
+                Environment.SetEnvironmentVariable("ConnectionSql", "Data Source=(localdb)\\MSSQLLocalDB;Database=dbApicomDDD;Integrated Security=true");
+            }
+
             ConfigureService.ConfigureDependenciesService(services);
-            ConfigureRepository.ConfigureDependenciesRepository(services, Configuration);
+            ConfigureRepository.ConfigureDependenciesRepository(services);
 
             var config = new MapperConfiguration(cfg =>
             {
@@ -42,14 +53,6 @@ namespace Application
             var signingConfiguration = new SigningConfiguration();
             services.AddSingleton(signingConfiguration);
 
-            var tokenConfiguration = new TokenConfiguration();
-
-            new ConfigureFromConfigurationOptions<TokenConfiguration>(
-                Configuration.GetSection("TokenConfigurations")
-            ).Configure(tokenConfiguration);
-
-            services.AddSingleton(tokenConfiguration);
-
             services.AddAuthentication(auth =>
             {
                 auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -58,8 +61,8 @@ namespace Application
             {
                 var paramsValidation = options.TokenValidationParameters;
                 paramsValidation.IssuerSigningKey = signingConfiguration.Key;
-                paramsValidation.ValidAudience = tokenConfiguration.Audience;
-                paramsValidation.ValidIssuer = tokenConfiguration.Issuer;
+                paramsValidation.ValidAudience = Environment.GetEnvironmentVariable("Audience");
+                paramsValidation.ValidIssuer = Environment.GetEnvironmentVariable("Issuer");
                 paramsValidation.ValidateIssuerSigningKey = true;
                 paramsValidation.ValidateLifetime = true;
                 paramsValidation.ClockSkew = TimeSpan.Zero;

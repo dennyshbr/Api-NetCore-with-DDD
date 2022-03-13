@@ -17,17 +17,14 @@ namespace Api.Service.Services
     {
         private readonly IUserRepository _userRepository;
         private SigningConfiguration _signingConfiguration;
-        private TokenConfiguration _tokenConfiguration;
         private IConfiguration _configuration;
 
         public LoginService(IUserRepository userRepository,
                             SigningConfiguration signingConfiguration,
-                            TokenConfiguration tokenConfiguration,
                             IConfiguration configuration)
         {
             _userRepository = userRepository;
             _signingConfiguration = signingConfiguration;
-            _tokenConfiguration = tokenConfiguration;
             _configuration = configuration;
         }
 
@@ -49,7 +46,10 @@ namespace Api.Service.Services
                 var identity = GerarClaimsIdentity(user.Email);
 
                 DateTime createDate = DateTime.Now;
-                DateTime expiryDate = createDate + TimeSpan.FromSeconds(_tokenConfiguration.Seconds);
+
+                double seconds = double.Parse(Environment.GetEnvironmentVariable("Seconds"));
+
+                DateTime expiryDate = createDate + TimeSpan.FromSeconds(seconds);
 
                 var handler = new JwtSecurityTokenHandler();
 
@@ -86,8 +86,8 @@ namespace Api.Service.Services
         {
             var securityToken = handler.CreateToken(new SecurityTokenDescriptor
             {
-                Issuer = _tokenConfiguration.Issuer,
-                Audience = _tokenConfiguration.Audience,
+                Issuer = Environment.GetEnvironmentVariable("Issuer"),
+                Audience = Environment.GetEnvironmentVariable("Audience"),
                 SigningCredentials = _signingConfiguration.SigningCredentials,
                 Subject = identity,
                 NotBefore = createDate,
